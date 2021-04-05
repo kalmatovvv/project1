@@ -1,0 +1,58 @@
+{% extends 'base.html' %}
+{% load static %}
+{% block content %}
+<div id="main">
+
+						<!-- Featured Post -->
+							<article class="post featured">
+								<header class="major">
+									<span class="date">April 25, 2017</span>
+									<h2><a href="#">Check Out<br />
+                                        Interesting Posts</a></h2>
+									<p>Aenean ornare velit lacus varius enim ullamcorper proin aliquam<br />
+									facilisis ante sed etiam magna interdum congue. Lorem ipsum dolor<br />
+									amet nullam sed etiam veroeros.</p>
+								</header>
+								<a href="#" class="image main"><img src="images/pic01.jpg" alt="" /></a>
+								<ul class="actions special">
+									<li><a href="{% url 'login' %}" class="button large">LogIn</a></li>
+									<li><a href="{% url 'signup' %}" class="button large">SignUp</a></li>
+
+                                </ul>
+							</article>
+
+						<!-- Posts -->
+
+							<section class="posts">
+							{% for post in posts %}
+								<article>
+									<header>
+										<span class="date">{{ post.created }}</span>
+										<h2>{{ post.title }}</h2>
+									</header>
+									<a href="#" class="image"><img src="{{ post.image.url }}" alt=""/></a>
+									<p>{{ post.content|truncatewords:15 }}</p>
+									<ul class="actions special">
+										<li><a href="{% url 'detail' post.id %}" class="button">Full Story</a></li>
+									</ul>
+								</article>
+                                {% endfor %}
+							</section>
+
+						<!-- Footer -->
+							<footer>
+								<div class="pagination">
+									<!--<a href="#" class="previous">Prev</a>-->
+									<a href="#" class="page active">1</a>
+									<a href="#" class="page">2</a>
+									<a href="#" class="page">3</a>
+									<span class="extra">&hellip;</span>
+									<a href="#" class="page">8</a>
+									<a href="#" class="page">9</a>
+									<a href="#" class="page">10</a>
+									<a href="#" class="next">Next</a>
+								</div>
+							</footer>
+
+					</div>
+{% endblock %}
