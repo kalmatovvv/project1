@@ -33,9 +33,19 @@ body {
 	line-height: 1;
 }
 
+.btn {
+    color: red;
+}
+
+
+btn btn-secondary {
+    height: 50px;
+    width: 100px;
+}
+
 
 .d-flex {
-    position: center;
+
 }
 
 ol, ul {
@@ -4692,3 +4702,9 @@ input, select, textarea {
 		}
 
 	}
+
+.mainnav {
+    position: center;
+    margin-left: 50%;
+
+}

@@ -13,3 +13,6 @@ class RecipeAdmin(admin.ModelAdmin):
     inlines = [ImageInLineAdmin,]
 
 admin.site.register(Category)
+
+
+#Comment

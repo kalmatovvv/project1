@@ -1,23 +1,28 @@
 {% extends 'base.html' %}
 {% load static %}
 {% block content %}
-<div id="main">
+
+
 
 						<!-- Featured Post -->
 							<article class="post featured">
 								<header class="major">
-									<span class="date">April 25, 2017</span>
-									<h2><a href="#">Check Out<br />
-                                        Interesting Posts</a></h2>
-									<p>Aenean ornare velit lacus varius enim ullamcorper proin aliquam<br />
-									facilisis ante sed etiam magna interdum congue. Lorem ipsum dolor<br />
-									amet nullam sed etiam veroeros.</p>
+									<h2><a href="#">Welcome<br />
+                                        Check Out The Latest Posts</a></h2>
+									<p>We are pleased that you came here. Enjoy your time exploring the best website in the world!</p>
 								</header>
-								<a href="#" class="image main"><img src="images/pic01.jpg" alt="" /></a>
+								<a href="#" class="image main"><img src="images/pic01.jpg" alt=""></a>
 								<ul class="actions special">
+									      {% if not request.user.is_authenticated %}
 									<li><a href="{% url 'login' %}" class="button large">LogIn</a></li>
 									<li><a href="{% url 'signup' %}" class="button large">SignUp</a></li>
-
+									{% else %}
+									<a href="{% url 'create-post' %}" class="button large">Create Post<a/>
+									<li><a href="{% url 'logout' %}" class="button large">LogOut</a></li>
+      								<span></span>
+									{% endif %}
+									{% if request.user.is_authenticated %}
+								  {% endif %}
                                 </ul>
 							</article>
 
@@ -30,7 +35,7 @@
 										<span class="date">{{ post.created }}</span>
 										<h2>{{ post.title }}</h2>
 									</header>
-									<a href="#" class="image"><img src="{{ post.image.url }}" alt=""/></a>
+									<a href="{% url 'detail' post.id %}" class="image"><img src="{{ post.image.url }}" alt="" width="450" height="300"/></a>
 									<p>{{ post.content|truncatewords:15 }}</p>
 									<ul class="actions special">
 										<li><a href="{% url 'detail' post.id %}" class="button">Full Story</a></li>
@@ -39,20 +44,24 @@
                                 {% endfor %}
 							</section>
 
-						<!-- Footer -->
+
 							<footer>
 								<div class="pagination">
 									<!--<a href="#" class="previous">Prev</a>-->
-									<a href="#" class="page active">1</a>
-									<a href="#" class="page">2</a>
-									<a href="#" class="page">3</a>
-									<span class="extra">&hellip;</span>
-									<a href="#" class="page">8</a>
-									<a href="#" class="page">9</a>
-									<a href="#" class="page">10</a>
-									<a href="#" class="next">Next</a>
+									      {% if page_obj.has_previous %}
+									<li class="page-item">
+									<a href="{% url 'list' posts %}?page={{ page_obj.previous_page_number }}" class="page active"><span aria-hidden="true">&laquo;</span></a>
+									</li>
+									{% endif %}
+									<li class="page-item"><a class="page-link" href="#">{{ page_obj.number }}</a></li>
+									{% if page_obj.has_next %}
+									<li class="page-item">
+										<a href="{% url 'list' posts %}?page={{ page_obj.next_page_number }}" class="page" aria-label="Next"><span aria-hidden="true">&raquo;</span></a>
+									</li>
+									{% endif %}
+
 								</div>
 							</footer>
 
-					</div>
+
 {% endblock %}

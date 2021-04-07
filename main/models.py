@@ -2,7 +2,7 @@ from django.db import models
 
 # Create your models here.
 class Category(models.Model):
-    slug = models.SlugField(primary_key=True, max_length=50)
+    slug = models.SlugField(primary_key=True)
     name = models.CharField(max_length=50)
     image = models.ImageField(upload_to='categories', blank=True, null=True)
     parent = models.ForeignKey('self', related_name='children', null=True, blank=True, on_delete=models.CASCADE)
@@ -49,3 +49,7 @@ class Image(models.Model):
 
     def __str__(self):
         return self.image.url
+
+
+#Comments
+
